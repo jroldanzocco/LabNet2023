@@ -6,8 +6,20 @@ using System.Threading.Tasks;
 
 namespace AppTransporte
 {
-    class Omnibus
+    class Omnibus : TransportePublico
     {
-       
+        public Omnibus(int cantPasajeros) : base(cantPasajeros)
+        {
+           
+        }
+        public override string Avanzar()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string Detenerse()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

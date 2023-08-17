@@ -8,9 +8,13 @@ namespace AppTransporte
 {
     public abstract class TransportePublico
     {
+        public TransportePublico(int cantPasajeros)
+        {
+            this.Pasajeros = cantPasajeros;
+        }
         public int Pasajeros { get; }
-        public abstract void Avanzar();
-        public abstract void Detenerse();
+        public abstract string Avanzar();
+        public abstract string Detenerse();
 
     }
 }
