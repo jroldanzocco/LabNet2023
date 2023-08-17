@@ -21,11 +21,9 @@ namespace AppTransporte
                 Console.Write("Ingrese su opcion: " );
                 input = Console.ReadLine();
                 Console.Clear();
+
                 if (esNumero(input))
-                {
-                    if (enRango(Convert.ToInt32(input), 0, 2))
-                        _opcion = Convert.ToInt32(input);    
-                }
+                    _opcion = Convert.ToInt32(input);    
                 
                 switch (_opcion)
                 {
@@ -53,13 +51,9 @@ namespace AppTransporte
                 }
             return valor;
         }
+        
 
-        private bool enRango(int numero, int min, int max)
-        {
-            if (numero >= min && numero <= max)
-                return true;
-            return false;
-        }
+
 
     }
 }
