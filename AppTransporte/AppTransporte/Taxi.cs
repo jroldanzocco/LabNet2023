@@ -8,7 +8,7 @@ namespace AppTransporte
 {
     class Taxi : TransportePublico
     {
-        public Taxi(int cantPasajeros) : base(cantPasajeros)
+        public Taxi(int cantPasajeros, int limitePasajeros) : base(cantPasajeros, limitePasajeros)
         {
             
         }

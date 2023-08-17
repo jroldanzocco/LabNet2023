@@ -8,9 +8,10 @@ namespace AppTransporte
 {
     class Omnibus : TransportePublico
     {
-        public Omnibus(int cantPasajeros) : base(cantPasajeros)
+        private int _limitePasajeros;
+        public Omnibus(int cantPasajeros, int limitePasajeros) : base(cantPasajeros, limitePasajeros)
         {
-           
+            
         }
         public override string Avanzar()
         {
