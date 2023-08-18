@@ -12,6 +12,7 @@ namespace AppTransporte
         private List<TransportePublico> _vehiculos;
         public Menu()
         {
+            bool inputCorrecto;
             _vehiculos = new List<TransportePublico>();
             for(int i=0; i<10; i++)
             {
@@ -21,24 +22,22 @@ namespace AppTransporte
                     _vehiculos.Add(new Omnibus(0,100));
             }
             _opcion = -1;
-            string input;
-            while(_opcion != 0)
+            
+            while(_opcion != 3)
             {
                 Console.WriteLine("1 - Registrar pasajeros");
                 Console.WriteLine("2 - Ver cantidad de pasajeros");
-                Console.WriteLine("0 - Salir del programa.");
+                Console.WriteLine("3 - Salir del programa.");
                 Console.Write("Ingrese su opcion: " );
-                input = Console.ReadLine();
+                string input = Console.ReadLine();
                 Console.Clear();
 
-                if (esNumero(input))
-                    _opcion = Convert.ToInt32(input);    
-                
+                inputCorrecto = int.TryParse(input, out _opcion);
+               
                 switch (_opcion)
                 {
                     case 1:
-                        registrarPasajeros();
-                        Console.ReadKey();
+                        RegistrarPasajeros();
                         Console.Clear();
                         break;
                     case 2:
@@ -54,45 +53,39 @@ namespace AppTransporte
 
             }
         }
-        private bool esNumero(string cadena)
+        private void RegistrarPasajeros()
         {
-            bool valor = true ;
-            if(cadena == string.Empty || cadena == null)
-                valor = false;
-            else 
-                foreach(char caracter in cadena.ToCharArray())
-                {
-                    valor = valor && char.IsDigit(caracter);
-                }
-            return valor;
-        }
-
-        private void registrarPasajeros()
-        {
-            int contador = 1, pasajeros = 0;
+            int contador = 1, pasajeros;
             string input;
-            
-            foreach(var vehiculos in _vehiculos)
+            bool inputCorrecto;
+
+            foreach (TransportePublico vehiculo in _vehiculos)
             {
+                pasajeros = 0;
+
                 if (contador > 5)
                     contador = 1;
-                Console.WriteLine($"Indique pasajeros para {vehiculos.GetType().Name} {contador} (Maximo {vehiculos.LimitePasajeros})");
-                input = Console.ReadLine();
-                if (esNumero(input))
-                {
-                    pasajeros = Convert.ToInt32(input);
-                    if (pasajeros > 0 && pasajeros <= vehiculos.LimitePasajeros)
-                        vehiculos.Pasajeros = pasajeros;
-                }
-                else
-                {
-                    pasajeros = 0;
-                }
-                contador++;
-            }
 
+                while (pasajeros == 0)
+                {
+                    Console.WriteLine($"Indique pasajeros para {vehiculo.GetType().Name} {contador} (Maximo {vehiculo.LimitePasajeros})");
+                    input = Console.ReadLine();
+                    inputCorrecto = int.TryParse(input, out pasajeros);
+                    if (pasajeros > 0 && pasajeros <= vehiculo.LimitePasajeros && inputCorrecto)
+                    {
+                        vehiculo.Pasajeros = pasajeros;
+                        contador++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Los pasajeros no pueden ser 0 ni mayor al maximo...");
+                        pasajeros = 0;
+                    }
+                }
+            }
         }
-        void verPasajeros()
+      
+        private void verPasajeros()
         {
             int contador = 1;
             foreach (var vehiculos in _vehiculos)
