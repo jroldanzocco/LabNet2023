@@ -12,28 +12,28 @@ namespace AppTransporte
         private List<TransportePublico> _vehiculos;
         public Menu()
         {
-            bool inputCorrecto;
             _vehiculos = new List<TransportePublico>();
-            for(int i=0; i<10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 if (i >= 5)
-                    _vehiculos.Add(new Taxi(0,4));
+                    _vehiculos.Add(new Taxi(0, 4, i - 4));
                 else
-                    _vehiculos.Add(new Omnibus(0,100));
+                    _vehiculos.Add(new Omnibus(0, 100, i + 1));
             }
             _opcion = -1;
-            
-            while(_opcion != 3)
+
+            while (_opcion != 5)
             {
                 Console.WriteLine("1 - Registrar pasajeros");
                 Console.WriteLine("2 - Ver cantidad de pasajeros");
-                Console.WriteLine("3 - Salir del programa.");
-                Console.Write("Ingrese su opcion: " );
+                Console.WriteLine("3 - Avanzar");
+                Console.WriteLine("4 - Detenerse");
+                Console.WriteLine("5 - Salir del programa.");
+                Console.Write("Ingrese su opcion: ");
                 string input = Console.ReadLine();
+                int.TryParse(input, out _opcion);
                 Console.Clear();
 
-                inputCorrecto = int.TryParse(input, out _opcion);
-               
                 switch (_opcion)
                 {
                     case 1:
@@ -41,7 +41,17 @@ namespace AppTransporte
                         Console.Clear();
                         break;
                     case 2:
-                        verPasajeros();
+                        VerPasajeros();
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case 3:
+                        Iniciar();
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case 4:
+                        Parar();
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -55,26 +65,21 @@ namespace AppTransporte
         }
         private void RegistrarPasajeros()
         {
-            int contador = 1, pasajeros;
+            int pasajeros;
             string input;
-            bool inputCorrecto;
 
             foreach (TransportePublico vehiculo in _vehiculos)
             {
                 pasajeros = 0;
 
-                if (contador > 5)
-                    contador = 1;
-
                 while (pasajeros == 0)
                 {
-                    Console.WriteLine($"Indique pasajeros para {vehiculo.GetType().Name} {contador} (Maximo {vehiculo.LimitePasajeros})");
+                    Console.WriteLine($"Indique pasajeros para {vehiculo.GetType().Name} {vehiculo.NumeroVehiculo} (Maximo {vehiculo.LimitePasajeros})");
                     input = Console.ReadLine();
-                    inputCorrecto = int.TryParse(input, out pasajeros);
-                    if (pasajeros > 0 && pasajeros <= vehiculo.LimitePasajeros && inputCorrecto)
+                    int.TryParse(input, out pasajeros);
+                    if (pasajeros > 0 && pasajeros <= vehiculo.LimitePasajeros)
                     {
                         vehiculo.Pasajeros = pasajeros;
-                        contador++;
                     }
                     else
                     {
@@ -84,19 +89,50 @@ namespace AppTransporte
                 }
             }
         }
-      
-        private void verPasajeros()
-        {
-            int contador = 1;
-            foreach (var vehiculos in _vehiculos)
-            {
-                if (contador > 5)
-                    contador = 1;
-                Console.WriteLine($"{vehiculos.GetType().Name} {contador}: {vehiculos.Pasajeros} pasajeros.");
 
-                contador++;
+        private void VerPasajeros()
+        {
+            foreach (TransportePublico vehiculos in _vehiculos)
+            {
+                Console.WriteLine($"{vehiculos.GetType().Name} {vehiculos.NumeroVehiculo}: {vehiculos.Pasajeros} pasajeros.");
+            }
+        }
+        private void Iniciar()
+        {
+            string input;
+            int numOpcion = 1;
+            Console.WriteLine("Indique el vehiculo");
+            foreach (TransportePublico vehiculo in _vehiculos)
+            {
+                Console.WriteLine($"{numOpcion} - {vehiculo.GetType().Name} {vehiculo.NumeroVehiculo}.");
+                numOpcion++;
+            }
+            input = Console.ReadLine();
+            int.TryParse(input, out numOpcion);
+            for(int i=0; i<_vehiculos.Count; i++)
+            {
+                if (i + 1 == numOpcion)
+                    Console.WriteLine(_vehiculos[i].Avanzar());
             }
         }
 
+        private void Parar()
+        {
+            string input;
+            int numOpcion = 1;
+            Console.WriteLine("Indique el vehiculo");
+            foreach (TransportePublico vehiculo in _vehiculos)
+            {
+                Console.WriteLine($"{numOpcion} - {vehiculo.GetType().Name} {vehiculo.NumeroVehiculo}.");
+                numOpcion++;
+            }
+            input = Console.ReadLine();
+            int.TryParse(input, out numOpcion);
+            for (int i = 0; i < _vehiculos.Count; i++)
+            {
+                if (i + 1 == numOpcion)
+                    Console.WriteLine(_vehiculos[i].Detenerse());
+            }
+        }
     }
 }
