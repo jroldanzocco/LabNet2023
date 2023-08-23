@@ -10,20 +10,17 @@ namespace ExceptionExtension
 
             try
             {
-                Console.WriteLine("Division por cero (0)");
-                primerNumero = ValidarInputDecimal("Ingrese el dividendo: ");
+                primerNumero = ValidarInputDecimal("Ingresar dividendo: ");
                 resultado = primerNumero.DividirPor(segundoNumero);
             }
             catch (DivideByZeroException ex)
             {
-                Console.WriteLine($"Excepcion: {ex.Message}");
+                Console.WriteLine($"Excepcion {ex.Message}");
             }
             finally
             {
-                Console.WriteLine("La operacion finalizo");
+                Console.WriteLine("La operacion finalizo.");
             }
-
-
         }
         public decimal DividirDosNumeros(decimal primerNumero, decimal segundoNumero)
         {

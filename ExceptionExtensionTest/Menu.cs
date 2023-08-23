@@ -29,7 +29,16 @@ namespace ExceptionExtension
                         EsperarUsuario();
                         break;
                     case 2:
-                        _metodos.DividirDosNumeros(_metodos.ValidarInputDecimal("Ingresa dividendo"), _metodos.ValidarInputDecimal("Ingresa divisor"));
+                        try
+                        {
+                            decimal resultado = _metodos.DividirDosNumeros(_metodos.ValidarInputDecimal("Ingresa dividendo"), _metodos.ValidarInputDecimal("Ingresa divisor"));
+                            Console.WriteLine($"Resultado: {resultado}");
+                        }
+                        catch (DivideByZeroException ex)
+                        {
+                            Console.WriteLine($"¡Solo Chuck Norris divide por cero! - {ex.Message}");
+                        }
+                        
                         EsperarUsuario();
                         break;
                     case 3:

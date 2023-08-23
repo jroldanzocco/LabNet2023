@@ -16,25 +16,35 @@ namespace ExceptionExtension.Tests
         {
             //arrange
 
-            decimal numeroUno = 20;
-            decimal numeroDos = 5;
-            decimal numeroEsperado = 4;
+            decimal numeroUno = 20, numeroDos = 5, numeroTres = 2, numeroCuatro = 10;
 
+            decimal numeroEsperado1 = 4, numeroEsperado2 = 10, numeroEsperado3 = 2;
+
+
+            var metodo = new Metodos();
             //act
-            decimal actual = Metodos.DividirDosNumeros(numeroUno, numeroDos);
+            decimal actual1 = metodo.DividirDosNumeros(numeroUno, numeroDos);
+            decimal actual2 = metodo.DividirDosNumeros(numeroUno, numeroTres);
+            decimal actual3 = metodo.DividirDosNumeros(numeroUno, numeroCuatro);
+            decimal actual4 = metodo.DividirDosNumeros(numeroCuatro, numeroDos);
 
 
 
             //assert
-            Assert.AreEqual(numeroEsperado, actual);
+            Assert.AreEqual(numeroEsperado1, actual1);
+            Assert.AreEqual(numeroEsperado2, actual2);
+            Assert.AreEqual(numeroEsperado3, actual3);
+            Assert.AreEqual(numeroEsperado3, actual4);
         }
 
         [TestMethod]
         [ExpectedException(typeof(DivideByZeroException))]
         public void Dividir_PorCero_LanzaExcepcion()
         {
+            var metodo = new Metodos();
             //arrange
-            Metodos.DividirDosNumeros(20, 0);
+            metodo.DividirDosNumeros(20, 0);
+            metodo.DividirDosNumeros(10, 0);
         }
     }
 }
