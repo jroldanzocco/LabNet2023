@@ -2,9 +2,9 @@
 
 namespace ExceptionExtension
 {
-    public static class Metodos
+    public class Metodos
     {
-        public static void DivisionPorCero()
+        public void DivisionPorCero()
         {
             decimal primerNumero, segundoNumero = 0, resultado;
 
@@ -25,28 +25,20 @@ namespace ExceptionExtension
 
 
         }
-        public static void DividirDosNumeros()
+        public decimal DividirDosNumeros(decimal primerNumero, decimal segundoNumero)
         {
-            decimal primerNumero, segundoNumero, resultado;
-
+            decimal resultado;
             try
             {
-                Console.WriteLine("Division de dos numeros");
-                primerNumero = ValidarInputDecimal("Ingrese el dividendo: ");
-                segundoNumero = ValidarInputDecimal("Ingrese el divisor: ");
                 resultado = primerNumero.DividirPor(segundoNumero);
-                Console.WriteLine($"El resultado es: {resultado}");
+                return resultado;
             }
             catch (DivideByZeroException ex)
             {
-                Console.WriteLine($"{ex.Message}... ¡Solo Chuck Norris divide por cero!");
-            }
-            finally
-            {
-                Console.WriteLine("La operacion finalizo");
+                throw ex;
             }
         }
-        public static void MostrarExcepcion()
+        public void MostrarExcepcion()
         {
             Logic logic = new Logic();
 
@@ -59,7 +51,7 @@ namespace ExceptionExtension
                 Console.WriteLine($"{ex.GetType().Name} - { ex.Message}");
             }
         }
-        public static void MostrarExcepcionPersonalizada()
+        public void MostrarExcepcionPersonalizada()
         {
             Logic logic = new Logic();
             try
@@ -71,7 +63,7 @@ namespace ExceptionExtension
                 Console.WriteLine($"{ex.GetType().Name} - {ex.Message}");
             }
         }
-        private static decimal ValidarInputDecimal(string mensajeSolicitando)
+        public decimal ValidarInputDecimal(string mensajeSolicitando)
         {
             decimal numero = 0;
             bool inputValido = false;

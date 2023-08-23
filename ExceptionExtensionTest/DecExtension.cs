@@ -10,12 +10,12 @@ namespace ExceptionExtension
             try
             {
                 resultado = numeroUno / numeroDos;
+                return resultado;
             }
             catch (DivideByZeroException ex)
             {
                 throw ex;
             }
-            return resultado;
         }
     }
 }

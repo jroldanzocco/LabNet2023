@@ -5,10 +5,11 @@ namespace ExceptionExtension
     class Menu
     {
         private int _opcion;
+        Metodos _metodos;
         public Menu()
         {
             _opcion = -1;
-
+            _metodos = new Metodos();
             while(_opcion != 5)
             {
                 Console.WriteLine("1 - Dividir por cero");
@@ -24,19 +25,19 @@ namespace ExceptionExtension
                 switch (_opcion)
                 {
                     case 1:
-                        Metodos.DivisionPorCero();
+                        _metodos.DivisionPorCero();
                         EsperarUsuario();
                         break;
                     case 2:
-                        Metodos.DividirDosNumeros();
+                        _metodos.DividirDosNumeros(_metodos.ValidarInputDecimal("Ingresa dividendo"), _metodos.ValidarInputDecimal("Ingresa divisor"));
                         EsperarUsuario();
                         break;
                     case 3:
-                        Metodos.MostrarExcepcion();
+                        _metodos.MostrarExcepcion();
                         EsperarUsuario();
                         break;
                     case 4:
-                        Metodos.MostrarExcepcionPersonalizada();
+                        _metodos.MostrarExcepcionPersonalizada();
                         EsperarUsuario();
                         break;
                     default:
