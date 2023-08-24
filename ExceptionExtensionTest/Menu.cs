@@ -5,7 +5,7 @@ namespace ExceptionExtension
     class Menu
     {
         private int _opcion;
-        Metodos _metodos;
+        private Metodos _metodos;
         public Menu()
         {
             _opcion = -1;
