@@ -25,7 +25,19 @@ namespace ExceptionExtension
                 switch (_opcion)
                 {
                     case 1:
-                        _metodos.DivisionPorCero();
+                        try
+                        {
+                            _metodos.DivisionPorCero(_metodos.ValidarInputDecimal("Ingresar dividendo"));
+                        }
+                        catch (DivideByZeroException ex)
+                        {
+                            Console.WriteLine($"Excepcion {ex.Message}");
+                        }
+                        finally
+                        {
+                            Console.WriteLine("La operacion finalizo.");
+                        }
+                        
                         EsperarUsuario();
                         break;
                     case 2:

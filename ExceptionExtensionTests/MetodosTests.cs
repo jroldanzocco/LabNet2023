@@ -20,8 +20,8 @@ namespace ExceptionExtension.Tests
 
             decimal numeroEsperado1 = 4, numeroEsperado2 = 10, numeroEsperado3 = 2;
 
-
             var metodo = new Metodos();
+
             //act
             decimal actual1 = metodo.DividirDosNumeros(numeroUno, numeroDos);
             decimal actual2 = metodo.DividirDosNumeros(numeroUno, numeroTres);

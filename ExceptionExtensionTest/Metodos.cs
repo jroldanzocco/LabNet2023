@@ -4,22 +4,17 @@ namespace ExceptionExtension
 {
     public class Metodos
     {
-        public void DivisionPorCero()
+        public void DivisionPorCero(decimal primerNumero)
         {
-            decimal primerNumero, segundoNumero = 0, resultado;
+            decimal segundoNumero = 0, resultado;
 
             try
             {
-                primerNumero = ValidarInputDecimal("Ingresar dividendo: ");
                 resultado = primerNumero.DividirPor(segundoNumero);
             }
             catch (DivideByZeroException ex)
             {
-                Console.WriteLine($"Excepcion {ex.Message}");
-            }
-            finally
-            {
-                Console.WriteLine("La operacion finalizo.");
+                throw ex;
             }
         }
         public decimal DividirDosNumeros(decimal primerNumero, decimal segundoNumero)
@@ -78,7 +73,6 @@ namespace ExceptionExtension
                 }
             }
             return numero;
-            
         }
     }
 }
