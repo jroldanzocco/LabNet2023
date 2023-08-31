@@ -1,4 +1,4 @@
-namespace Northwind.To.EF.Data
+namespace Northwind.To.EF.Entities
 {
     using System;
     using System.Collections.Generic;

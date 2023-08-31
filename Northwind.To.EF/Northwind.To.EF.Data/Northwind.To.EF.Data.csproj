@@ -50,16 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Customers.cs" />
-    <Compile Include="Employees.cs" />
     <Compile Include="NorthwindContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Suppliers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Northwind.To.EF.Entities\Northwind.To.EF.Entities.csproj">
+      <Project>{C7A0C9C2-A954-4713-A6F6-39F10A894E62}</Project>
+      <Name>Northwind.To.EF.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
