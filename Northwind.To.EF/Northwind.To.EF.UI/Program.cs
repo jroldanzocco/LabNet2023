@@ -14,10 +14,26 @@ namespace Northwind.To.EF.UI
         {
             CustomersLogic logicaClientes = new CustomersLogic();
 
-            foreach(Customers cliente in logicaClientes.GetAll())
+            //logicaClientes.Add(new Customers
+            //{
+            //    CustomerID = "JERE",
+            //    CompanyName = "Motorola"
+            //});
+
+            foreach (Customers cliente in logicaClientes.GetAll())
             {
                 Console.WriteLine(cliente.CompanyName);
             }
+
+
+
+            //var resultado = logicaClientes.GetById("QUICK");
+            //if(resultado != null)
+            //    Console.WriteLine(resultado.CompanyName);
+            //else
+            //    Console.WriteLine("No se pudo acceder");
+
+
 
             Console.ReadKey();
         }
