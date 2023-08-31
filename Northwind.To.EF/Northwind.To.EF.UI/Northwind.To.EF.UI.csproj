@@ -57,5 +57,15 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Northwind.To.EF.Entities\Northwind.To.EF.Entities.csproj">
+      <Project>{C7A0C9C2-A954-4713-A6F6-39F10A894E62}</Project>
+      <Name>Northwind.To.EF.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Northwind.To.EF.Logic\Northwind.To.EF.Logic.csproj">
+      <Project>{0C72A9F0-8AE5-4B1D-8273-A6054FB78D2C}</Project>
+      <Name>Northwind.To.EF.Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
