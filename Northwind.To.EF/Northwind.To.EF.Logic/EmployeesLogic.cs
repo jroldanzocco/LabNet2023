@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Northwind.To.EF.Logic
 {
-    class EmployeesLogic : BaseLogic, IABMLLogic<Employees, int>
+    public class EmployeesLogic : BaseLogic, IABMLLogic<Employees, int>
     {
         public void Add(Employees newEntity)
         {
@@ -31,7 +31,8 @@ namespace Northwind.To.EF.Logic
 
         public IQueryable<Employees> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Employees.AsQueryable()
+                .OrderBy(e => e.LastName);
         }
 
         public Employees GetById(int id)

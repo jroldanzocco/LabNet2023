@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Northwind.To.EF.UI
 {
-    class Menu
+    public class Menu
     {
         private MenuClientes menuClientes;
         public Menu(){}

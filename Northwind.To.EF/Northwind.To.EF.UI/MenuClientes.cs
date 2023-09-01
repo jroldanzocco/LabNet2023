@@ -14,10 +14,8 @@ namespace Northwind.To.EF.UI
     {
         private readonly CustomersLogic _clientes;
         public MenuClientes()
-        {
-            
+        {  
             _clientes = new CustomersLogic();
-            
         }
 
         public void MostrarMenu()
@@ -38,19 +36,19 @@ namespace Northwind.To.EF.UI
                 switch (opcion)
                 {
                     case 1:
-                        MostrarClientes();
+                        Listar();
                         EsperarUsuario();
                         break;
                     case 2:
-                        AgregarCliente();
+                        Agregar();
                         EsperarUsuario();
                         break;
                     case 3:
-                        buscarCliente();
+                        Buscar();
                         EsperarUsuario();
                         break;
                     case 4:
-                        BorrarCliente();
+                        Eliminar();
                         EsperarUsuario();
                         break;
                     case 5:
@@ -61,14 +59,14 @@ namespace Northwind.To.EF.UI
                 }
             }
         }
-        private void MostrarClientes()
+        private void Listar()
         {
             foreach (Customers cliente in _clientes.GetAll())
             {
                 Console.WriteLine($"ID: {cliente.CustomerID} - Compania: {cliente.CompanyName} - Localizacion: {cliente.Country}");
             }
         }
-        private void AgregarCliente()
+        private void Agregar()
         {
             Console.Write("Ingresa ID (maximo 5 caracteres): ");
             string id = Console.ReadLine();
@@ -96,7 +94,7 @@ namespace Northwind.To.EF.UI
                 Console.WriteLine("Formato invalido. No se cargo el cliente");
             }
         }
-        private void buscarCliente()
+        private void Buscar()
         {
             Console.WriteLine("Ingrese el ID del cliente (Maximo 5 caracteres)");
             string id = Console.ReadLine();
@@ -114,7 +112,7 @@ namespace Northwind.To.EF.UI
                 Console.WriteLine("Ingreso invalido");
             }
         }
-        private void BorrarCliente()
+        private void Eliminar()
         {
             Console.WriteLine("Ingresa el ID del cliente a borrar");
             string id = Console.ReadLine();
