@@ -13,6 +13,7 @@ namespace Northwind.To.EF.UI
         static void Main(string[] args)
         {
             Menu menu = new Menu();
+            menu.Mostrar();
         }
     }
 }

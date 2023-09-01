@@ -19,7 +19,9 @@ namespace Northwind.To.EF.Logic
                 _context.SaveChanges();
             }
             else
+            {
                 throw new ExistentRegException();
+            }
         }
 
         public void Delete(string id)
