@@ -133,6 +133,7 @@ namespace Northwind.To.EF.UI
                         Console.WriteLine($"ID: {clienteABorrar.CustomerID} - Compania: {clienteABorrar.CompanyName} - Localizacion: {clienteABorrar.Country}");
                         Console.WriteLine("\n1 - SI");
                         Console.WriteLine("2 - NO");
+                        Console.Write("Ingrese la opcion: ");
                         int.TryParse(Console.ReadLine(), out opcion);
 
                         switch (opcion)
