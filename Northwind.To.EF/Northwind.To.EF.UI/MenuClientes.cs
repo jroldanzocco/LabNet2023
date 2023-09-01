@@ -38,15 +38,19 @@ namespace Northwind.To.EF.UI
                 switch (opcion)
                 {
                     case 1:
+                        MostrarClientes();
                         EsperarUsuario();
                         break;
                     case 2:
+                        AgregarCliente();
                         EsperarUsuario();
                         break;
                     case 3:
+                        buscarCliente();
                         EsperarUsuario();
                         break;
                     case 4:
+                        BorrarCliente();
                         EsperarUsuario();
                         break;
                     case 5:

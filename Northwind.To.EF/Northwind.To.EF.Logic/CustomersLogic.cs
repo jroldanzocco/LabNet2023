@@ -37,7 +37,7 @@ namespace Northwind.To.EF.Logic
         public IQueryable<Customers> GetAll()
         {
             return _context.Customers.AsQueryable()
-                .OrderBy(c => c.CustomerID);
+                .OrderBy(c => c.CompanyName);
         }
 
         public Customers GetById(string id)
