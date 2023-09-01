@@ -23,7 +23,7 @@ namespace Northwind.To.EF.UI
                 Console.WriteLine("1 - Listar Clientes");
                 Console.WriteLine("2 - Agregar Cliente");
                 Console.WriteLine("3 - Buscar Cliente por ID");
-                Console.WriteLine("4 - ");
+                Console.WriteLine("4 - Borrar Cliente");
                 Console.WriteLine("5 - Salir");
                 Console.Write("Ingrese su opcion: ");
 
@@ -33,10 +33,7 @@ namespace Northwind.To.EF.UI
                 switch (_opcion)
                 {
                     case 1:
-                        foreach(Customers cliente in _clientes.GetAll())
-                        {
-                            Console.WriteLine($"ID: {cliente.CustomerID} - Compania: {cliente.CompanyName} - Localizacion: {cliente.Country}");
-                        }
+                        MostrarClientes();
                         EsperarUsuario();
                         break;
                     case 2:
@@ -48,6 +45,8 @@ namespace Northwind.To.EF.UI
                         EsperarUsuario();
                         break;
                     case 4:
+                        BorrarCliente();
+                        EsperarUsuario();
                         break;
                     case 5:
                         Console.WriteLine("Gracias por usar el programa");
@@ -63,6 +62,13 @@ namespace Northwind.To.EF.UI
             Console.WriteLine("\nPresione una tecla para continuar...");
             Console.ReadKey();
             Console.Clear();
+        }
+        private void MostrarClientes()
+        {
+            foreach (Customers cliente in _clientes.GetAll())
+            {
+                Console.WriteLine($"ID: {cliente.CustomerID} - Compania: {cliente.CompanyName} - Localizacion: {cliente.Country}");
+            }
         }
         private void AgregarCliente()
         {
@@ -80,7 +86,7 @@ namespace Northwind.To.EF.UI
                     CustomerID = id,
                     CompanyName = compania,
                     Country = pais
-                }) ;
+                });
                 Console.WriteLine("Cliente cargado exitosamente!");
             }
             catch (ExistentRegException ex)
@@ -97,13 +103,56 @@ namespace Northwind.To.EF.UI
             Console.WriteLine("Ingrese el ID del cliente (Maximo 5 caracteres)");
             string id = Console.ReadLine();
             Customers clienteBuscado;
-            if(id.Length <= 5 && id.Length > 0)
+            if (id.Length <= 5 && id.Length > 0)
             {
-                  clienteBuscado = _clientes.GetById(id);
-                    if (clienteBuscado != null)
-                        Console.WriteLine($"ID: {clienteBuscado.CustomerID} - Compania: {clienteBuscado.CompanyName} - Localizacion: {clienteBuscado.Country}");
-                    else
-                        Console.WriteLine("No se encontro el cliente.");
+                clienteBuscado = _clientes.GetById(id);
+                if (clienteBuscado != null)
+                    Console.WriteLine($"ID: {clienteBuscado.CustomerID} - Compania: {clienteBuscado.CompanyName} - Localizacion: {clienteBuscado.Country}");
+                else
+                    Console.WriteLine("No se encontro el cliente.");
+            }
+            else
+            {
+                Console.WriteLine("Ingreso invalido");
+            }
+        }
+        private void BorrarCliente()
+        {
+            Console.WriteLine("Ingresa el ID del cliente a borrar");
+            string id = Console.ReadLine();
+            Customers clienteABorrar;
+            if (id.Length <= 5 && id.Length > 0)
+            {
+                clienteABorrar = _clientes.GetById(id);
+                if (clienteABorrar != null)
+                {
+                    int opcion = -1;
+                    while(opcion != 2)
+                    {
+                        Console.WriteLine("¿Seguro que desea eliminar el siguiente registro?");
+                        Console.WriteLine($"ID: {clienteABorrar.CustomerID} - Compania: {clienteABorrar.CompanyName} - Localizacion: {clienteABorrar.Country}");
+                        Console.WriteLine("\n1 - SI");
+                        Console.WriteLine("2 - NO");
+                        int.TryParse(Console.ReadLine(), out opcion);
+
+                        switch (opcion)
+                        {
+                            case 1:
+                                _clientes.Delete(id);
+                                Console.WriteLine("El registro se elimino exitosamente.");
+                                opcion = 2;
+                                break;
+                            case 2:
+                                break;
+                            default:
+                                Console.WriteLine("Ingreso invalido");
+                                break;
+                        }
+                    }
+                   
+                }
+                else
+                    Console.WriteLine("No se encontro el cliente.");
             }
             else
             {
