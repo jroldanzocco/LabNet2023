@@ -91,7 +91,7 @@ namespace Northwind.To.EF.UI
             }
             catch (ExistentRegException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"{ex.GetType().Name} - {ex.Message}");
             }
             catch (DbEntityValidationException)
             {

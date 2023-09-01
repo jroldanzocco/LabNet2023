@@ -10,7 +10,7 @@ namespace Northwind.To.EF.CommonComponents
     {
         public ExistentRegException() { }
 
-        public override string Message => $"El ID indicado ya se encuentra en uso";
+        public override string Message => "El ID indicado ya se encuentra en uso";
 
     }
 }
