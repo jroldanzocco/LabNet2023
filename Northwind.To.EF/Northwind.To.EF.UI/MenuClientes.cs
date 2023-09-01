@@ -21,13 +21,14 @@ namespace Northwind.To.EF.UI
         public void MostrarMenu()
         {
             int opcion = -1;
-            while (opcion != 5)
+            while (opcion != 6)
             {
                 Console.WriteLine("1 - Listar clientes");
                 Console.WriteLine("2 - Agregar cliente");
                 Console.WriteLine("3 - Buscar cliente por ID");
-                Console.WriteLine("4 - Borrar cliente");
-                Console.WriteLine("5 - Volver al menu anterior");
+                Console.WriteLine("4 - Actualizar cliente");
+                Console.WriteLine("5 - Eliminar cliente");
+                Console.WriteLine("6 - Volver al menu anterior");
                 Console.Write("Ingrese su opcion: ");
 
                 int.TryParse(Console.ReadLine(), out opcion);
@@ -48,10 +49,14 @@ namespace Northwind.To.EF.UI
                         EsperarUsuario();
                         break;
                     case 4:
-                        Eliminar();
+                        Actualizar();
                         EsperarUsuario();
                         break;
                     case 5:
+                        Eliminar();
+                        EsperarUsuario();
+                        break;
+                    case 6:
                         break;
                     default:
                         Console.WriteLine("Ingresa un numero valido.");
@@ -122,40 +127,54 @@ namespace Northwind.To.EF.UI
                 clienteABorrar = _clientes.GetById(id);
                 if (clienteABorrar != null)
                 {
-                    int opcion = -1;
-                    while (opcion != 2)
-                    {
-                        Console.WriteLine("¿Seguro que desea eliminar el siguiente registro?");
-                        Console.WriteLine($"ID: {clienteABorrar.CustomerID} - Compania: {clienteABorrar.CompanyName} - Localizacion: {clienteABorrar.Country}");
-                        Console.WriteLine("\n1 - SI");
-                        Console.WriteLine("2 - NO");
-                        Console.Write("Ingrese la opcion: ");
-                        int.TryParse(Console.ReadLine(), out opcion);
-
-                        switch (opcion)
-                        {
-                            case 1:
-                                _clientes.Delete(id);
-                                Console.WriteLine("El registro se elimino exitosamente.");
-                                opcion = 2;
-                                break;
-                            case 2:
-                                break;
-                            default:
-                                Console.WriteLine("Ingreso invalido");
-                                break;
-                        }
-                    }
-
+                    ConfirmacionBorrado(id, clienteABorrar);
                 }
                 else
+                {
                     Console.WriteLine("No se encontro el cliente.");
+                }
             }
             else
             {
                 Console.WriteLine("Ingreso invalido");
             }
         }
+        private void ConfirmacionBorrado(string id, Customers cliente)
+        {
+            int opcion = -1;
+            while (opcion != 2)
+            {
+                Console.WriteLine("¿Seguro que desea eliminar el siguiente registro?");
+                Console.WriteLine($"ID: {cliente.CustomerID} - Compania: {cliente.CompanyName} - Localizacion: {cliente.Country}");
+                Console.WriteLine("\n1 - SI");
+                Console.WriteLine("2 - NO");
+                Console.Write("Ingrese la opcion: ");
+                int.TryParse(Console.ReadLine(), out opcion);
+
+                switch (opcion)
+                {
+                    case 1:
+                        try
+                        {
+                            _clientes.Delete(id);
+                            Console.WriteLine("El registro se elimino exitosamente.");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("No se pudo eliminar el registro por conflictos de referencias");
+                        }
+                       
+                        opcion = 2;
+                        break;
+                    case 2:
+                        break;
+                    default:
+                        Console.WriteLine("Ingreso invalido");
+                        break;
+                }
+            }
+        }
+        private void Actualizar() { }
     }
 }
 

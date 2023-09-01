@@ -2,6 +2,7 @@
 using Northwind.To.EF.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,8 +30,18 @@ namespace Northwind.To.EF.Logic
             var clienteABorrar = _context.Customers.Where(c => c.CustomerID == id).FirstOrDefault();
             if(clienteABorrar != null)
             {
-                _context.Customers.Remove(clienteABorrar);
-                _context.SaveChanges();
+                try
+                {
+                    _context.Customers.Remove(clienteABorrar);
+                    _context.SaveChanges();
+                }
+                catch (DbUpdateException ex)
+                {
+                    var entry = _context.Entry(clienteABorrar);
+                    entry.State = System.Data.Entity.EntityState.Unchanged;
+                    entry.Reload();
+                    throw ex;
+                }
             }
         }
 
@@ -42,7 +53,9 @@ namespace Northwind.To.EF.Logic
 
         public Customers GetById(string id)
         {
-            return _context.Customers.Find(id);
+            var cliente = _context.Customers.Where(c => c.CustomerID == id).FirstOrDefault();
+
+            return cliente;
         }
 
         public void Update(Customers entity)
