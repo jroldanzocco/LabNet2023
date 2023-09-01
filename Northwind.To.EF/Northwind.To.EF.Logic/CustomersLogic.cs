@@ -63,10 +63,19 @@ namespace Northwind.To.EF.Logic
             var _clienteAModificar = _context.Customers.Where(c => c.CustomerID == entity.CustomerID).FirstOrDefault();
             if(_clienteAModificar != null)
             {
-                _clienteAModificar.ContactName = entity.ContactName;
-                _clienteAModificar.City = entity.City;
-                _clienteAModificar.Country = entity.Country;
-                _context.SaveChanges();
+                if(entity.CompanyName.Length <= 40 && entity.Country.Length <= 15)
+                {
+                    _clienteAModificar.ContactName = entity.ContactName;
+                    _clienteAModificar.City = entity.City;
+                    _clienteAModificar.Country = entity.Country;
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    _context.SaveChanges();
+                    throw new InvalidOperationException();
+                }
+                
             }
         }
     }

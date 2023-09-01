@@ -159,11 +159,10 @@ namespace Northwind.To.EF.UI
                             _clientes.Delete(id);
                             Console.WriteLine("El registro se elimino exitosamente.");
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             Console.WriteLine("No se pudo eliminar el registro por conflictos de referencias");
                         }
-                       
                         opcion = 2;
                         break;
                     case 2:
@@ -174,7 +173,65 @@ namespace Northwind.To.EF.UI
                 }
             }
         }
-        private void Actualizar() { }
+        private void Actualizar() {
+            Console.WriteLine("Ingresa el ID del cliente a modificar");
+            string id = Console.ReadLine();
+            
+            if (id.Length <= 5 && id.Length > 0)
+            {
+                Customers clienteAModificar = _clientes.GetById(id);
+                if (clienteAModificar != null)
+                {
+                    ConfirmacionUpdate(clienteAModificar);
+                }
+                else
+                {
+                    Console.WriteLine("No se encontro el cliente.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ingreso invalido");
+            }
+        }
+        private void ConfirmacionUpdate(Customers cliente)
+        {
+            int opcion = -1;
+            while (opcion != 2)
+            {
+                Console.WriteLine("¿Seguro que desea modificar el siguiente registro?");
+                Console.WriteLine($"ID: {cliente.CustomerID} - Compania: {cliente.CompanyName} - Localizacion: {cliente.Country}");
+                Console.WriteLine("\n1 - SI");
+                Console.WriteLine("2 - NO");
+                Console.Write("Ingrese la opcion: ");
+                int.TryParse(Console.ReadLine(), out opcion);
+
+                switch (opcion)
+                {
+                    case 1:
+                        try
+                        {
+                            Console.WriteLine("Nombre Compania: ");
+                            cliente.CompanyName = Console.ReadLine();
+                            Console.WriteLine("Pais: ");
+                            cliente.Country = Console.ReadLine();
+                            _clientes.Update(cliente);
+                            Console.WriteLine("El registro se modifico exitosamente.");
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Ingreso invalido - Compania max 50 caracteres. Pais max 15 caracteres");
+                        }
+                        opcion = 2;
+                        break;
+                    case 2:
+                        break;
+                    default:
+                        Console.WriteLine("Ingreso invalido");
+                        break;
+                }
+            }
+        }
     }
 }
 
