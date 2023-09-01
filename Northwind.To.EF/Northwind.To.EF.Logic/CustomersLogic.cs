@@ -1,4 +1,5 @@
-﻿using Northwind.To.EF.Entities;
+﻿using Northwind.To.EF.CommonComponents;
+using Northwind.To.EF.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,14 @@ namespace Northwind.To.EF.Logic
     {
         public void Add(Customers newEntity)
         {
-            _context.Customers.Add(newEntity);
-
-            _context.SaveChanges();
+            var existente = _context.Customers.Where(c => c.CustomerID == newEntity.CustomerID).FirstOrDefault();
+            if (existente == null)
+            {
+                _context.Customers.Add(newEntity);
+                _context.SaveChanges();
+            }
+            else
+                throw new ExistentRegException();
         }
 
         public void Delete(string id)
@@ -29,14 +35,12 @@ namespace Northwind.To.EF.Logic
         public IQueryable<Customers> GetAll()
         {
             return _context.Customers.AsQueryable()
-                .OrderByDescending(c => c.CustomerID);
+                .OrderBy(c => c.CustomerID);
         }
 
         public Customers GetById(string id)
         {
-            var cliente = _context.Customers.Where(c => c.CustomerID == id).FirstOrDefault();
-
-            return cliente;
+            return _context.Customers.Find(id);
         }
 
         public void Update(Customers entity)

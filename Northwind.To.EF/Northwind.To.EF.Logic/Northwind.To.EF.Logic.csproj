@@ -58,6 +58,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Northwind.To.EF.CommonComponents\Northwind.To.EF.CommonComponents.csproj">
+      <Project>{DAAC57EC-8989-4C43-8F1C-C8FFBC5029AE}</Project>
+      <Name>Northwind.To.EF.CommonComponents</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Northwind.To.EF.Data\Northwind.To.EF.Data.csproj">
       <Project>{4FCD456B-F90B-414A-8724-B4B4DF744766}</Project>
       <Name>Northwind.To.EF.Data</Name>
