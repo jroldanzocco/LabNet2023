@@ -1,8 +1,5 @@
 using Northwind.To.EF.Entities;
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Linq;
 
 namespace Northwind.To.EF.Data
 {
@@ -15,7 +12,6 @@ namespace Northwind.To.EF.Data
 
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<Suppliers> Suppliers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

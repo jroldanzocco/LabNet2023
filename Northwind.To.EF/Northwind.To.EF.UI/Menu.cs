@@ -1,28 +1,20 @@
-﻿using Northwind.To.EF.CommonComponents;
-using Northwind.To.EF.Entities;
-using Northwind.To.EF.Logic;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.Validation;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Northwind.To.EF.UI
 {
     public class Menu
     {
         private MenuClientes menuClientes;
+        private MenuEmpleados menuEmpleados;
         public Menu(){}
         public void Mostrar()
         {
             int opcion = -1;
-            while (opcion != 4)
+            while (opcion != 3)
             {
                 Console.WriteLine("1 - Clientes CRUD");
                 Console.WriteLine("2 - Empleados CRUD");
-                Console.WriteLine("3 - Proveedores CRUD");
-                Console.WriteLine("4 - Salir");
+                Console.WriteLine("3 - Salir");
                 Console.Write("Ingrese su opcion: ");
 
                 int.TryParse(Console.ReadLine(), out opcion);
@@ -36,10 +28,10 @@ namespace Northwind.To.EF.UI
                         menuClientes.MostrarMenu();
                         break;
                     case 2:
-
+                        menuEmpleados = new MenuEmpleados();
+                        menuEmpleados.MostrarMenu();
                         break;
                     case 3:
-
                         break;
                     case 4:
                         Console.WriteLine("Gracias por usar el programa");

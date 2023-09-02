@@ -1,10 +1,8 @@
 ﻿using Northwind.To.EF.CommonComponents;
 using Northwind.To.EF.Entities;
 using System;
-using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Northwind.To.EF.Logic
 {
@@ -26,7 +24,10 @@ namespace Northwind.To.EF.Logic
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var empleadoABorrar = _context.Employees.Where(e => e.EmployeeID == id).FirstOrDefault();
+            
+                 _context.Employees.Remove(empleadoABorrar);
+                 _context.SaveChanges();
         }
 
         public IQueryable<Employees> GetAll()
@@ -37,12 +38,28 @@ namespace Northwind.To.EF.Logic
 
         public Employees GetById(int id)
         {
-            throw new NotImplementedException();
+            var empleado = _context.Employees.Where(e => e.EmployeeID == id).FirstOrDefault();
+
+            return empleado;
         }
 
         public void Update(Employees entity)
         {
-            throw new NotImplementedException();
+            var empleadoAModificar = _context.Employees.Where(e => e.EmployeeID == entity.EmployeeID).FirstOrDefault();
+            if (empleadoAModificar != null)
+            {
+                if (entity.LastName.Length <= 20 && entity.FirstName.Length <= 10)
+                {
+                    empleadoAModificar.FirstName = entity.FirstName;
+                    empleadoAModificar.LastName = entity.LastName;
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
+
+            }
         }
     }
 }
