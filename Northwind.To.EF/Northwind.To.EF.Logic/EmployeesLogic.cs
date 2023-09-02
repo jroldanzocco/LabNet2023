@@ -1,7 +1,6 @@
 ﻿using Northwind.To.EF.CommonComponents;
 using Northwind.To.EF.Entities;
 using System;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace Northwind.To.EF.Logic
