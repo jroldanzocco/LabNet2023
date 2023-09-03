@@ -26,6 +26,15 @@ namespace LINQ.Practica.Logic
 
             return customersFromWA;
         }
+        public List<string> GetCustomerNames()
+        {
+            var clientes = (from c in _context.Customers
+                            orderby c.ContactName
+                            select c.ContactName).ToList();
+
+            return clientes;
+        }
     }
+    
 }
 

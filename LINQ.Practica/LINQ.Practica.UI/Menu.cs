@@ -24,7 +24,8 @@ namespace LINQ.Practica.UI
                 Console.WriteLine("3 - Devolver productos con stock y precio minimo de 3");
                 Console.WriteLine("4 - Devolver clientes de region WA");
                 Console.WriteLine("5 - Devolver producto con ID 789");
-                Console.WriteLine("6 - Salir");
+                Console.WriteLine("6 - Mostrar nombres de clientes");
+                Console.WriteLine("7 - Salir");
                 Console.Write("Ingrese su opcion: ");
 
                 opcion = Console.ReadLine();
@@ -53,6 +54,10 @@ namespace LINQ.Practica.UI
                         EsperarUsuario();
                         break;
                     case "6":
+                        MostrarNombreClientes();
+                        EsperarUsuario();
+                        break;
+                    case "7":
                         _exit = true;
                         break;
                     default:
@@ -118,6 +123,16 @@ namespace LINQ.Practica.UI
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+        private void MostrarNombreClientes()
+        {
+            _clientes = new CustomerLogic();
+            foreach(string nombreCliente in _clientes.GetCustomerNames())
+            {
+               
+                if (nombreCliente != null)
+                    Console.WriteLine($"{nombreCliente.ToLower()}\n{nombreCliente.ToUpper()}\n");
             }
         }
     }
