@@ -21,5 +21,13 @@ namespace LINQ.Practica.Logic
                 .OrderBy(p => p.UnitPrice)
                 .ToList();
         }
+        public Products getBySpecificId(int id)
+        {
+            var producto = _context.Products.Where(p => p.ProductID == id).FirstOrDefault();
+            if(producto == null)
+                throw new Exception($"El producto con el ID {id} no existe");
+
+            return producto;
+        }
     }
 }

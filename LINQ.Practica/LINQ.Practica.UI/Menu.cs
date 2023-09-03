@@ -23,7 +23,8 @@ namespace LINQ.Practica.UI
                 Console.WriteLine("2 - Devolver productos sin stock");
                 Console.WriteLine("3 - Devolver productos con stock y precio minimo de 3");
                 Console.WriteLine("4 - Devolver clientes de region WA");
-                Console.WriteLine("5 - Salir");
+                Console.WriteLine("5 - Devolver producto con ID 789");
+                Console.WriteLine("6 - Salir");
                 Console.Write("Ingrese su opcion: ");
 
                 opcion = Console.ReadLine();
@@ -48,6 +49,10 @@ namespace LINQ.Practica.UI
                         EsperarUsuario();
                         break;
                     case "5":
+                        MostrarProductoID();
+                        EsperarUsuario();
+                        break;
+                    case "6":
                         _exit = true;
                         break;
                     default:
@@ -100,6 +105,19 @@ namespace LINQ.Practica.UI
             foreach(Customers cliente in _clientes.GetCustomersFromWA())
             {
                 Console.WriteLine($"{cliente.CompanyName} - Pais {cliente.Country} - Region: {cliente.Region}");
+            }
+        }
+        private void MostrarProductoID()
+        {
+            _productos = new ProductsLogic();
+            try
+            {
+                var producto = _productos.getBySpecificId(789);
+                Console.WriteLine($"Nombre: {producto.ProductName} - Stock: {producto.UnitsInStock} - Precio: {producto.UnitPrice.GetValueOrDefault():0.00}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
     }
