@@ -112,7 +112,7 @@ namespace LINQ.Practica.UI
             _productos = new ProductsLogic();
             try
             {
-                var producto = _productos.getBySpecificId(789);
+                var producto = _productos.GetBySpecificId(789);
                 Console.WriteLine($"Nombre: {producto.ProductName} - Stock: {producto.UnitsInStock} - Precio: {producto.UnitPrice.GetValueOrDefault():0.00}");
             }
             catch (Exception ex)
