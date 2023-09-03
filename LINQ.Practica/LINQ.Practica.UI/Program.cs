@@ -13,7 +13,6 @@ namespace LINQ.Practica.UI
         static void Main(string[] args)
         {
             Menu menu = new Menu();
-            Console.ReadKey();
         }
     }
 }

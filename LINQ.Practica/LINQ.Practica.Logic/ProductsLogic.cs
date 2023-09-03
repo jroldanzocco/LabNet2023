@@ -14,6 +14,12 @@ namespace LINQ.Practica.Logic
             return _context.Products.Where(p => p.UnitsInStock == 0)
                     .OrderBy(p => p.ProductName)
                     .ToList();
+        }   
+        public List<Products> GetPlusThree()
+        {
+            return _context.Products.Where(p => p.UnitsInStock > 0 && p.UnitPrice > 3)
+                .OrderBy(p => p.UnitPrice)
+                .ToList();
         }
     }
 }

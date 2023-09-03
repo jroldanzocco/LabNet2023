@@ -21,7 +21,7 @@ namespace LINQ.Practica.UI
             {
                 Console.WriteLine("1 - Devolver objeto Customer");
                 Console.WriteLine("2 - Devolver productos sin stock");
-                Console.WriteLine("3 - Lanzar excepcion");
+                Console.WriteLine("3 - Devolver productos con stock y precio minimo de 3");
                 Console.WriteLine("4 - Lanzar excepcion personalizada");
                 Console.WriteLine("5 - Salir");
                 Console.Write("Ingrese su opcion: ");
@@ -40,6 +40,7 @@ namespace LINQ.Practica.UI
                         EsperarUsuario();
                         break;
                     case "3":
+                        MostrarProductosConStock();
                         EsperarUsuario();
                         break;
                     case "4":
@@ -80,7 +81,16 @@ namespace LINQ.Practica.UI
             Console.WriteLine("PRODUCTOS FUERA DE STOCK\n");
             foreach(Products producto in _productos.GetOutStock())
             {
-                Console.WriteLine($"Nombre: {producto.ProductName} - Cantidad por unidad: {producto.QuantityPerUnit}");
+                Console.WriteLine($"Nombre: {producto.ProductName} - Stock: {producto.UnitsInStock} - Precio: {producto.UnitPrice.GetValueOrDefault():0.00}");
+            }
+        }
+        private void MostrarProductosConStock()
+        {
+            _productos = new ProductsLogic();
+            Console.WriteLine("PRODUCTOS CON STOCK Y PRECIO UNITARIO MAYOR A 3\n");
+            foreach(Products producto in _productos.GetPlusThree())
+            {
+                Console.WriteLine($"Nombre: {producto.ProductName} - Stock: {producto.UnitsInStock} - Precio: {producto.UnitPrice.GetValueOrDefault():0.00}");
             }
         }
     }
