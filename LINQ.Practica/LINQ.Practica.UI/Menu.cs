@@ -1,4 +1,5 @@
-﻿using LINQ.Practica.Logic;
+﻿using LINQ.Practica.Entities;
+using LINQ.Practica.Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace LINQ.Practica.UI
     {
         private readonly bool _exit;
         private CustomerLogic _clientes;
+        private ProductsLogic _productos;
         public Menu()
         {
             string opcion;
@@ -34,6 +36,7 @@ namespace LINQ.Practica.UI
                         EsperarUsuario();
                         break;
                     case "2":
+                        MostrarProductosSinStock();
                         EsperarUsuario();
                         break;
                     case "3":
@@ -57,7 +60,7 @@ namespace LINQ.Practica.UI
             Console.ReadKey();
             Console.Clear();
         }
-        void MostrarObjetoCustomer()
+        private void MostrarObjetoCustomer()
         {
             _clientes = new CustomerLogic();
             try
@@ -70,6 +73,15 @@ namespace LINQ.Practica.UI
                 Console.WriteLine(ex.Message);
             }
             
+        }
+        private void MostrarProductosSinStock()
+        {
+            _productos = new ProductsLogic();
+            Console.WriteLine("PRODUCTOS FUERA DE STOCK\n");
+            foreach(Products producto in _productos.GetOutStock())
+            {
+                Console.WriteLine($"Nombre: {producto.ProductName} - Cantidad por unidad: {producto.QuantityPerUnit}");
+            }
         }
     }
 }
