@@ -12,10 +12,7 @@ namespace LINQ.Practica.UI
     {
         static void Main(string[] args)
         {
-            CustomerLogic clientes = new CustomerLogic();
-            Customers cliente = clientes.ObtenerCliente();
-            Console.WriteLine($"{cliente.CompanyName} - {cliente.CustomerID}" );
-
+            Menu menu = new Menu();
             Console.ReadKey();
         }
     }
