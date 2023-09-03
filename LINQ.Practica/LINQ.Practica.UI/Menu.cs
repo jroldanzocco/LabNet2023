@@ -22,7 +22,7 @@ namespace LINQ.Practica.UI
                 Console.WriteLine("1 - Devolver objeto Customer");
                 Console.WriteLine("2 - Devolver productos sin stock");
                 Console.WriteLine("3 - Devolver productos con stock y precio minimo de 3");
-                Console.WriteLine("4 - Lanzar excepcion personalizada");
+                Console.WriteLine("4 - Devolver clientes de region WA");
                 Console.WriteLine("5 - Salir");
                 Console.Write("Ingrese su opcion: ");
 
@@ -44,6 +44,7 @@ namespace LINQ.Practica.UI
                         EsperarUsuario();
                         break;
                     case "4":
+                        MostrarClientesEnWA();
                         EsperarUsuario();
                         break;
                     case "5":
@@ -66,7 +67,7 @@ namespace LINQ.Practica.UI
             _clientes = new CustomerLogic();
             try
             {
-                var clienteAMostrar = _clientes.ObtenerCliente();
+                var clienteAMostrar = _clientes.GetCliente();
                 Console.WriteLine($"{clienteAMostrar.CompanyName} - Pais: {clienteAMostrar.Country}");
             }
             catch (Exception ex)
@@ -91,6 +92,14 @@ namespace LINQ.Practica.UI
             foreach(Products producto in _productos.GetPlusThree())
             {
                 Console.WriteLine($"Nombre: {producto.ProductName} - Stock: {producto.UnitsInStock} - Precio: {producto.UnitPrice.GetValueOrDefault():0.00}");
+            }
+        }
+        private void MostrarClientesEnWA()
+        {
+            _clientes = new CustomerLogic();
+            foreach(Customers cliente in _clientes.GetCustomersFromWA())
+            {
+                Console.WriteLine($"{cliente.CompanyName} - Pais {cliente.Country} - Region: {cliente.Region}");
             }
         }
     }

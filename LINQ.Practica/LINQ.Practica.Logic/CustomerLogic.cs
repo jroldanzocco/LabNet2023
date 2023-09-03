@@ -9,7 +9,7 @@ namespace LINQ.Practica.Logic
 {
     public class CustomerLogic : BaseLogic
     {
-        public Customers ObtenerCliente()
+        public Customers GetCliente()
         {
             var cliente = _context.Customers.FirstOrDefault();
             if (cliente != null)
@@ -17,5 +17,15 @@ namespace LINQ.Practica.Logic
             else
                 throw new Exception("La tabla clientes esta vacia");
         }
+        public IEnumerable<Customers> GetCustomersFromWA()
+        {
+            var customersFromWA = from customer in _context.Customers
+                                  where customer.Region == "WA"
+                                  orderby customer.CompanyName ascending
+                                  select customer;
+
+            return customersFromWA;
+        }
     }
 }
+
