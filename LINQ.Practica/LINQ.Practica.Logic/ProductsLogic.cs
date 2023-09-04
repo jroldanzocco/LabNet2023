@@ -21,7 +21,7 @@ namespace LINQ.Practica.Logic
         }
         public Products GetBySpecificId(int id)
         {
-            var producto = _context.Products.Where(p => p.ProductID == id).FirstOrDefault();
+            var producto = _context.Products.Where(p => p.ProductID == id).ToList().FirstOrDefault();
             if(producto == null)
                 throw new Exception($"El producto con el ID {id} no existe");
 
