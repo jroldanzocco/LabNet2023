@@ -44,6 +44,5 @@ namespace LINQ.Practica.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Details> Order_Details { get; set; }
 
-        public virtual Suppliers Suppliers { get; set; }
     }
 }

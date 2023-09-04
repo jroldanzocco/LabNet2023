@@ -13,7 +13,6 @@ namespace LINQ.Practica.Entities
         {
             Employees1 = new HashSet<Employees>();
             Orders = new HashSet<Orders>();
-            Territories = new HashSet<Territories>();
         }
 
         [Key]
@@ -77,7 +76,5 @@ namespace LINQ.Practica.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Territories> Territories { get; set; }
     }
 }
