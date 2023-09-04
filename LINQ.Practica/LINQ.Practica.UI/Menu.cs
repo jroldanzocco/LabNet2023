@@ -30,7 +30,7 @@ namespace LINQ.Practica.UI
                 Console.WriteLine("9 - Devolver productos ordenados por nombre");
                 Console.WriteLine("10 - Devolver productos ordenados por stock descendente");
                 Console.WriteLine("11 - Devolver productos por categoria");
-                Console.WriteLine("12 - Salir");
+                Console.WriteLine("12 - Devolver primer producto");
                 Console.WriteLine("13 - Salir");
                 Console.WriteLine("0 - Salir");
                 Console.Write("Ingrese su opcion: ");
@@ -88,7 +88,7 @@ namespace LINQ.Practica.UI
                         EsperarUsuario();
                         break;
                     case "12":
-
+                        DevolverPrimerProducto();
                         EsperarUsuario();
                         break;
                     case "13":
@@ -208,10 +208,23 @@ namespace LINQ.Practica.UI
         private void DevolverProdPorCategoria()
         {
             _productos = new ProductsLogic();
-            foreach (ProductPerCategorie producto in _productos.GetProductoPorCategoria())
+            foreach (ProductPerCategorie producto in _productos.GetProductByCategorie())
             {
                 Console.WriteLine($"Categoria: {producto.Categoria} - ID: {producto.Id} - Producto: {producto.Producto} - ");
             }  
+        }
+        private void DevolverPrimerProducto()
+        {
+            _productos = new ProductsLogic();
+            try
+            {
+                var prod = _productos.GetfirstProduct();
+                Console.WriteLine($"ID: {prod.ProductID} - Nombre: {prod.ProductName} - Stock: {prod.UnitsInStock}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

@@ -41,7 +41,7 @@ namespace LINQ.Practica.Logic
                     .OrderByDescending(p => p.UnitsInStock)
                     .ToList();
         }
-        public List<ProductPerCategorie> GetProductoPorCategoria()
+        public List<ProductPerCategorie> GetProductByCategorie()
         {
             return _context.Products.Join(_context.Categories, p => p.CategoryID, c => c.CategoryID,
                                             (Products, Categories) => new ProductPerCategorie
@@ -50,6 +50,18 @@ namespace LINQ.Practica.Logic
                                                 Producto = Products.ProductName,
                                                 Categoria = Categories.CategoryName
                                             }).OrderBy(p => p.Categoria).ToList();
+        }
+        public Products GetfirstProduct()
+        {
+            var producto = (from p in _context.Products
+                            where p.UnitsInStock > 0
+                            select p)
+                           .FirstOrDefault();
+
+            if (producto == null)
+                throw new Exception("No existen productos");
+
+            return producto;
         }
     }
 }
