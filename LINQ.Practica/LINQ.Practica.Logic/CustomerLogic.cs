@@ -58,7 +58,17 @@ namespace LINQ.Practica.Logic
                     .OrderBy(c => c.CompanyName)
                     .Take(3).ToList();
         }
+        public List<CustomerOrder> GetCustomersPerOrder()
+        {
+            return _context.Orders.GroupBy(o => o.CustomerID)
+                                  .Select(agrupacion => new CustomerOrder
+                                  {
+                                      CustomerID = agrupacion.Key,
+                                      Orders = agrupacion.Count()
+                                  }).ToList();
+        }
     }
+
     
 }
 

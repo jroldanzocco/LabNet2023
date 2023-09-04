@@ -31,7 +31,7 @@ namespace LINQ.Practica.UI
                 Console.WriteLine("10 - Devolver productos ordenados por stock descendente");
                 Console.WriteLine("11 - Devolver productos por categoria");
                 Console.WriteLine("12 - Devolver primer producto");
-                Console.WriteLine("13 - Salir");
+                Console.WriteLine("13 - Devolver cantidad de ordenes por cliente");
                 Console.WriteLine("0 - Salir");
                 Console.Write("Ingrese su opcion: ");
 
@@ -92,7 +92,7 @@ namespace LINQ.Practica.UI
                         EsperarUsuario();
                         break;
                     case "13":
-
+                        DevolverOrdenesPorCliente();
                         EsperarUsuario();
                         break;
                     
@@ -224,6 +224,14 @@ namespace LINQ.Practica.UI
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+        private void DevolverOrdenesPorCliente()
+        {
+            _clientes = new CustomerLogic();
+            foreach (CustomerOrder cliente in _clientes.GetCustomersPerOrder())
+            {
+                Console.WriteLine($"Cliente: {cliente.CustomerID} - Nombre: {cliente.CompanyName} - Cantidad de ordenes: {cliente.Orders}");
             }
         }
     }
