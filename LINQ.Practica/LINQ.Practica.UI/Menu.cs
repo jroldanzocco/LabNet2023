@@ -25,7 +25,8 @@ namespace LINQ.Practica.UI
                 Console.WriteLine("4 - Devolver clientes de region WA");
                 Console.WriteLine("5 - Devolver producto con ID 789");
                 Console.WriteLine("6 - Mostrar nombres de clientes");
-                Console.WriteLine("7 - Salir");
+                Console.WriteLine("7 - Devolver Join entre Customer y Order");
+                Console.WriteLine("8 - Salir");
                 Console.Write("Ingrese su opcion: ");
 
                 opcion = Console.ReadLine();
@@ -58,6 +59,10 @@ namespace LINQ.Practica.UI
                         EsperarUsuario();
                         break;
                     case "7":
+                        DevolverJoinCustomerOrder();
+                        EsperarUsuario();
+                        break;
+                    case "8":
                         _exit = true;
                         break;
                     default:
@@ -134,6 +139,15 @@ namespace LINQ.Practica.UI
                 if (nombreCliente != null)
                     Console.WriteLine($"{nombreCliente.ToLower()}\n{nombreCliente.ToUpper()}\n");
             }
+        }
+        private void DevolverJoinCustomerOrder()
+        {
+            _clientes = new CustomerLogic();
+            foreach(CustomerOrder cliente in _clientes.GetCustomerOrderWA())
+            {
+                Console.WriteLine($"{cliente.CustomerID} - {cliente.CompanyName} - {cliente.Region} - {cliente.OrderDate?.ToShortDateString()}");
+            }
+
         }
     }
 }

@@ -34,6 +34,24 @@ namespace LINQ.Practica.Logic
 
             return clientes;
         }
+        public List<CustomerOrder> GetCustomerOrderWA()
+        {
+            DateTime fechaFiltro = new DateTime(1997, 1, 1);
+
+            var clientJoin = (from c in _context.Customers
+                              join o in _context.Orders
+                              on c.CustomerID equals o.CustomerID
+                              where c.Region == "WA" && o.OrderDate > fechaFiltro
+                              select new CustomerOrder
+                              {
+                                  CustomerID = c.CustomerID,
+                                  CompanyName = c.CompanyName,
+                                  Region = c.Region,
+                                  OrderDate = o.OrderDate
+                              }).ToList();
+            return clientJoin;
+
+        }
     }
     
 }
