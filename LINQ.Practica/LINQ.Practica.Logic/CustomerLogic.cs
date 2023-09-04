@@ -50,7 +50,13 @@ namespace LINQ.Practica.Logic
                                   OrderDate = o.OrderDate
                               }).ToList();
             return clientJoin;
+        }
 
+        public List<Customers> GetThreeCustomersFromWA()
+        {
+            return _context.Customers.Where(c => c.Region == "WA")
+                    .OrderBy(c => c.CompanyName)
+                    .Take(3).ToList();
         }
     }
     

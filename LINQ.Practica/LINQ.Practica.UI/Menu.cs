@@ -26,7 +26,13 @@ namespace LINQ.Practica.UI
                 Console.WriteLine("5 - Devolver producto con ID 789");
                 Console.WriteLine("6 - Mostrar nombres de clientes");
                 Console.WriteLine("7 - Devolver Join entre Customer y Order");
-                Console.WriteLine("8 - Salir");
+                Console.WriteLine("8 - Devolver primeros 3 clientes de region WA");
+                Console.WriteLine("9 - Devolver productos ordenados por nombre");
+                Console.WriteLine("10 - Devolver productos ordenados por stock descendente");
+                Console.WriteLine("11 - Devolver productos por categoria");
+                Console.WriteLine("12 - Salir");
+                Console.WriteLine("13 - Salir");
+                Console.WriteLine("0 - Salir");
                 Console.Write("Ingrese su opcion: ");
 
                 opcion = Console.ReadLine();
@@ -34,6 +40,9 @@ namespace LINQ.Practica.UI
 
                 switch (opcion)
                 {
+                    case "0":
+                        _exit = true;
+                        break;
                     case "1":
                         MostrarObjetoCustomer();
                         EsperarUsuario();
@@ -63,8 +72,30 @@ namespace LINQ.Practica.UI
                         EsperarUsuario();
                         break;
                     case "8":
-                        _exit = true;
+                        DevolverTresClientesWA();
+                        EsperarUsuario();
                         break;
+                    case "9":
+                        DevolverProductorPorNombre();
+                        EsperarUsuario();
+                        break;
+                    case "10":
+                        DevolverProdPorStockDesc();
+                        EsperarUsuario();
+                        break;
+                    case "11":
+                        DevolverProdPorCategoria();
+                        EsperarUsuario();
+                        break;
+                    case "12":
+
+                        EsperarUsuario();
+                        break;
+                    case "13":
+
+                        EsperarUsuario();
+                        break;
+                    
                     default:
                         Console.WriteLine("Ingresa un numero valido.");
                         break;
@@ -148,6 +179,40 @@ namespace LINQ.Practica.UI
                 Console.WriteLine($"{cliente.CustomerID} - {cliente.CompanyName} - {cliente.Region} - {cliente.OrderDate?.ToShortDateString()}");
             }
 
+        }
+        private void DevolverTresClientesWA()
+        {
+            _clientes = new CustomerLogic();
+            foreach (Customers cliente in _clientes.GetThreeCustomersFromWA())
+            {
+                Console.WriteLine($"{cliente.CustomerID} - {cliente.CompanyName} - {cliente.Region}");
+            }
+        }
+        private void DevolverProductorPorNombre()
+        {
+            _productos = new ProductsLogic();
+
+            foreach (Products producto in _productos.GetProductByName())
+            {
+                Console.WriteLine($"Nombre: {producto.ProductName} - Stock: {producto.UnitsInStock}");
+            }
+        }
+        private void DevolverProdPorStockDesc()
+        {
+            _productos = new ProductsLogic();
+            foreach (Products producto in _productos.GetProductByStock())
+            {
+                Console.WriteLine($"Nombre: {producto.ProductName} - Stock: {producto.UnitsInStock}");
+            }
+        }
+        private void DevolverProdPorCategoria()
+        {
+            _productos = new ProductsLogic();
+            foreach (ProductPerCategorie producto in _productos.GetProductoPorCategoria())
+            {
+                Console.WriteLine($"{producto.Id} - {producto.Producto} - Categoria: {producto.Categoria}");
+            }
+            
         }
     }
 }

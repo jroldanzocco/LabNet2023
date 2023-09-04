@@ -29,5 +29,27 @@ namespace LINQ.Practica.Logic
 
             return producto;
         }
+        public List<Products> GetProductByName()
+        {
+            return _context.Products.Where(p => p.UnitsInStock > 0)
+                    .OrderBy(p => p.ProductName)
+                    .ToList();
+        }
+        public List<Products> GetProductByStock()
+        {
+            return _context.Products.Where(p => p.UnitsInStock > 0)
+                    .OrderByDescending(p => p.UnitsInStock)
+                    .ToList();
+        }
+        public List<ProductPerCategorie> GetProductoPorCategoria()
+        {
+            return _context.Products.Join(_context.Categories, p => p.CategoryID, c => c.CategoryID,
+                                            (Products, Categories) => new ProductPerCategorie
+                                            {
+                                                Id = Products.ProductID,
+                                                Producto = Products.ProductName,
+                                                Categoria = Categories.CategoryName
+                                            }).ToList();
+        }
     }
 }
