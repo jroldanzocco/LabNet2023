@@ -210,9 +210,8 @@ namespace LINQ.Practica.UI
             _productos = new ProductsLogic();
             foreach (ProductPerCategorie producto in _productos.GetProductoPorCategoria())
             {
-                Console.WriteLine($"{producto.Id} - {producto.Producto} - Categoria: {producto.Categoria}");
-            }
-            
+                Console.WriteLine($"Categoria: {producto.Categoria} - ID: {producto.Id} - Producto: {producto.Producto} - ");
+            }  
         }
     }
 }

@@ -49,7 +49,7 @@ namespace LINQ.Practica.Logic
                                                 Id = Products.ProductID,
                                                 Producto = Products.ProductName,
                                                 Categoria = Categories.CategoryName
-                                            }).ToList();
+                                            }).OrderBy(p => p.Categoria).ToList();
         }
     }
 }
