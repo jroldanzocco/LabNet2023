@@ -219,7 +219,7 @@ namespace LINQ.Practica.UI
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message + " - " + ex.GetType().Name);
             }
         }
         private void DevolverOrdenesPorCliente()

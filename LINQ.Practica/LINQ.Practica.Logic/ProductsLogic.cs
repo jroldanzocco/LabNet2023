@@ -51,15 +51,18 @@ namespace LINQ.Practica.Logic
         }
         public Products GetfirstProduct()
         {
-            var producto = (from p in _context.Products
-                            where p.UnitsInStock > 0
-                            select p)
-                           .FirstOrDefault();
-
-            if (producto == null)
-                throw new Exception("No existen productos");
-
-            return producto;
+            try
+            {
+                var producto = (from p in _context.Products
+                                where p.UnitsInStock < 0
+                                select p)
+                                .First();
+                return producto;
+            }
+            catch (Exception ex)
+            {
+               throw (ex);
+            }
         }
     }
 }
