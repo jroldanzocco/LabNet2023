@@ -101,8 +101,8 @@ namespace LINQ.Practica.UI
         private void EsperarUsuario()
         {
             Console.WriteLine("Presione una tecla para continuar...");
-            Console.Clear();
             Console.ReadKey();
+            Console.Clear();
         }
         private void MostrarObjetoCustomer()
         {
