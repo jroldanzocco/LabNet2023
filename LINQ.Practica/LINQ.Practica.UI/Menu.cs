@@ -1,10 +1,6 @@
 ﻿using LINQ.Practica.Entities;
 using LINQ.Practica.Logic;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LINQ.Practica.UI
 {
@@ -105,8 +101,8 @@ namespace LINQ.Practica.UI
         private void EsperarUsuario()
         {
             Console.WriteLine("Presione una tecla para continuar...");
-            Console.ReadKey();
             Console.Clear();
+            Console.ReadKey();
         }
         private void MostrarObjetoCustomer()
         {
