@@ -1,7 +1,5 @@
 let $boton = document.getElementById("enviar-numero");
-let $alerta = document.getElementById("alerta");
 let $ingresoNumero = document.getElementById("ingreso-numero");
-let $resultado = document.getElementById("resultado");
 
 const numeroSecreto = getRandomNumber();
 let vidas;
