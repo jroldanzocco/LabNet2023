@@ -1,0 +1,39 @@
+body {
+  background-color: aquamarine;
+}
+
+.form-group {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 50vh;
+}
+
+#ingreso-numero {
+  text-align: center;
+  font-weight: bold;
+}
+
+#ronda {
+  font-weight: bold;
+}
+
+.rainbow-text {
+  background-image: linear-gradient(
+    to left,
+    violet,
+    indigo,
+    blue,
+    green,
+    yellow,
+    orange,
+    red
+  );
+}
