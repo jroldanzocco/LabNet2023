@@ -1,4 +1,4 @@
-﻿@model Northwind.To.EF.MVC.Models.EmployeeView
+﻿@model Northwind.To.EF.MVC.Models.EmployeeViewModel
 
 @{
     ViewBag.Title = "Employee page";
@@ -8,9 +8,9 @@
 
 @using (Html.BeginForm("Insert", "Employee", FormMethod.Post))
 {
-    <label>Nombre: </label> @Html.TextBoxFor(e => e.FirstName)
-    <label>Apellido: </label> @Html.TextBoxFor(e => e.LastName)
-    <label>Rol: </label> @Html.TextBoxFor(e => e.Title)
+    <label>Nombre: </label> @Html.TextBoxFor(e => e.Nombre)
+    <label>Apellido: </label> @Html.TextBoxFor(e => e.Apellido)
+    <label>Rol: </label> @Html.TextBoxFor(e => e.Rol)
     <input type="submit" class="btn btn-success" value="Guardar" />
 
 }

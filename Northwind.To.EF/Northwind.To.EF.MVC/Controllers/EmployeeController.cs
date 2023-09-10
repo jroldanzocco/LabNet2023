@@ -31,21 +31,26 @@ namespace Northwind.To.EF.MVC.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Insert(EmployeeView empView)
+        public ActionResult Insert(EmployeeViewModel empView)
         {
             try
             {
-                var employeeEntity = new Employees
+                if(ModelState.IsValid)
                 {
-                    EmployeeID = empView.Id,
-                    FirstName = empView.FirstName,
-                    LastName = empView.LastName,
-                    Title = empView.Title
-                };
-
-                logic.Add(employeeEntity);
-
-                return RedirectToAction("Index");
+                    var employeeEntity = new Employees
+                    {
+                        FirstName = empView.Nombre,
+                        LastName = empView.Apellido,
+                        Title = empView.Rol
+                    };
+                    logic.Add(employeeEntity);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Error");
+                }
+                
             }
             catch (Exception)
             {
