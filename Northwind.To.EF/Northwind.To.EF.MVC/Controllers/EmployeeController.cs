@@ -47,7 +47,7 @@ namespace Northwind.To.EF.MVC.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return RedirectToAction("Index", "Error");
             }
@@ -55,8 +55,16 @@ namespace Northwind.To.EF.MVC.Controllers
 
         public ActionResult Delete(int id)
         {
-            logic.Delete(id);
-            return RedirectToAction("Index");
+            try
+            {
+                logic.Delete(id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index","Error");
+            }
+            
         }
     }
 }

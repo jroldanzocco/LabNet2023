@@ -25,9 +25,16 @@ namespace Northwind.To.EF.Logic
         public void Delete(int id)
         {
             var empleadoABorrar = _context.Employees.Where(e => e.EmployeeID == id).FirstOrDefault();
-            
-                 _context.Employees.Remove(empleadoABorrar);
-                 _context.SaveChanges();
+            try
+            {
+                _context.Employees.Remove(empleadoABorrar);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+                 
         }
 
         public List<Employees> GetAll()
