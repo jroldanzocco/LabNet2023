@@ -39,7 +39,7 @@ namespace Northwind.To.EF.Logic
 
         public List<Employees> GetAll()
         {
-            return _context.Employees.OrderBy(e => e.LastName).ToList();
+            return _context.Employees.OrderByDescending(e => e.EmployeeID).ToList();
         }
 
         public Employees GetById(int id)
