@@ -1,6 +1,7 @@
 ﻿using Northwind.To.EF.CommonComponents;
 using Northwind.To.EF.Entities;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 
@@ -42,10 +43,9 @@ namespace Northwind.To.EF.Logic
             }
         }
 
-        public IQueryable<Customers> GetAll()
+        public List<Customers> GetAll()
         {
-            return _context.Customers.AsQueryable()
-                .OrderBy(c => c.CompanyName);
+            return _context.Customers.OrderBy(c => c.CompanyName).ToList();
         }
 
         public Customers GetById(string id)

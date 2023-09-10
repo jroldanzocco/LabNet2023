@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Northwind.To.EF.Logic
 {
@@ -7,7 +8,7 @@ namespace Northwind.To.EF.Logic
         void Add(T1 newEntity);
         void Update(T1 entity);
         void Delete(T2 id);
-        IQueryable<T1> GetAll();
+        List<T1> GetAll();
         T1 GetById(T2 id);
 
     }

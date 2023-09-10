@@ -1,6 +1,7 @@
 ﻿using Northwind.To.EF.CommonComponents;
 using Northwind.To.EF.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Northwind.To.EF.Logic
@@ -29,10 +30,9 @@ namespace Northwind.To.EF.Logic
                  _context.SaveChanges();
         }
 
-        public IQueryable<Employees> GetAll()
+        public List<Employees> GetAll()
         {
-            return _context.Employees.AsQueryable()
-                .OrderBy(e => e.LastName);
+            return _context.Employees.OrderBy(e => e.LastName).ToList();
         }
 
         public Employees GetById(int id)
