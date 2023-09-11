@@ -11,7 +11,7 @@ namespace Northwind.To.EF.MVC.Controllers
 {
     public class EmployeeController : Controller
     {
-        private readonly EmployeesLogic logic = new EmployeesLogic();
+        private EmployeesLogic logic = new EmployeesLogic();
         // GET: Employee
         public ActionResult Index()
         {
@@ -31,35 +31,69 @@ namespace Northwind.To.EF.MVC.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Insert(EmployeeViewModel empView)
+        public ActionResult Insert(EmployeeViewInsert model)
         {
             try
             {
-                if(ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     var employeeEntity = new Employees
                     {
-                        FirstName = empView.Nombre,
-                        LastName = empView.Apellido,
-                        Title = empView.Rol
+                        FirstName = model.Nombre,
+                        LastName = model.Apellido,
+                        Title = model.Rol
                     };
                     logic.Add(employeeEntity);
                     return RedirectToAction("Index");
                 }
-                else
-                {
-                    return RedirectToAction("Index", "Error");
-                }
-                
+                return View(model);
             }
             catch (Exception)
             {
-                return RedirectToAction("Index", "Error");
+                throw;
             }
+            
         }
 
+        public ActionResult Update(int id)
+        {
+            EmployeeView model = new EmployeeView();
+            var employee = logic.GetById(id);
+
+            model.Id = employee.EmployeeID;
+            model.FirstName = employee.FirstName;
+            model.LastName = employee.LastName;
+            model.Title = employee.Title;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Update(EmployeeView model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var employee = logic.GetById(model.Id);
+                    employee.FirstName = model.FirstName;
+                    employee.LastName = model.LastName;
+                    employee.Title = model.Title;
+
+                    logic.Update(employee);
+
+                    return RedirectToAction("Index");
+                }
+                return View(model);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
         public ActionResult Delete(int id)
         {
+            logic = new EmployeesLogic();
             try
             {
                 logic.Delete(id);

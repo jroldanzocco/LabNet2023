@@ -54,17 +54,11 @@ namespace Northwind.To.EF.Logic
             var empleadoAModificar = _context.Employees.Where(e => e.EmployeeID == entity.EmployeeID).FirstOrDefault();
             if (empleadoAModificar != null)
             {
-                if (entity.LastName.Length <= 20 && entity.FirstName.Length <= 10)
-                {
                     empleadoAModificar.FirstName = entity.FirstName;
                     empleadoAModificar.LastName = entity.LastName;
+                    empleadoAModificar.Title = entity.Title;
                     _context.SaveChanges();
-                }
-                else
-                {
-                    throw new InvalidOperationException();
-                }
-
+                
             }
         }
     }

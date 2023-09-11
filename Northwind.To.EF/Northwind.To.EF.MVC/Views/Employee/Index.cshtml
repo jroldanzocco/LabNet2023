@@ -26,13 +26,15 @@
             <td>@empleado.LastName</td>
             <td>@empleado.FirstName</td>
             <td>@empleado.Title</td>
-            <td>@Html.ActionLink("Eliminar","Delete", new { id = empleado.Id}, new {onclick = "return confirm('Esta seguro de borrar?')"})</td>
+            <td>
+                
+                    <a class="btn btn-warning" href="@Url.Action("Update", new { id = empleado.Id })">Editar</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", new { id = empleado.Id })" onclick="return confirm('¿Está seguro de borrar?');">Eliminar</a>
+            </td>
             
         </tr>
         }
-        </tbody>
+    </tbody>
 </table>
 
-<div>
-    @Html.ActionLink("Agregar empleado", "Insert")
-</div>
+

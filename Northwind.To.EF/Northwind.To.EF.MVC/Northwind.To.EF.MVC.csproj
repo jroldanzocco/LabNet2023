@@ -133,7 +133,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeView.cs" />
-    <Compile Include="Models\EmployeeViewModel.cs" />
+    <Compile Include="Models\EmployeeViewInsert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +177,7 @@
     <Content Include="Views\Employee\Insert.cshtml" />
     <Content Include="Views\View.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Employee\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

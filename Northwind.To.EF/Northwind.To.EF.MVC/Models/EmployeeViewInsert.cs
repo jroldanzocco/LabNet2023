@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Northwind.To.EF.MVC.Models
 {
-    public class EmployeeViewModel
+    public class EmployeeViewInsert
     {
         [Required]
         [StringLength(10)]
