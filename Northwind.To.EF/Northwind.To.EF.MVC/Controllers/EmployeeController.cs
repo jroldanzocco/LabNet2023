@@ -101,9 +101,9 @@ namespace Northwind.To.EF.MVC.Controllers
             }
             catch (Exception)
             {
-                return RedirectToAction("Index","Error");
+                return RedirectToAction("Index", "Error");
             }
-            
+
         }
     }
 }

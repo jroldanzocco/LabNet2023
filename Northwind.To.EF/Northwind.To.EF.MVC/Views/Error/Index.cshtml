@@ -2,4 +2,7 @@
     ViewBag.Title = "Error page";
 }
 
-<p>Hubo un error</p>
+<h2>Error</h2>
+<p>No puede borrarse este registro por referencias existentes en la base de datos, por favor elija otro.</p>
+
+<a href="@Url.Action("Index","Employee")" class="btn btn-primary" >Volver atras</a>
