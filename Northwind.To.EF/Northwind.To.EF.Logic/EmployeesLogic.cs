@@ -44,9 +44,17 @@ namespace Northwind.To.EF.Logic
 
         public Employees GetById(int id)
         {
-            var empleado = _context.Employees.Where(e => e.EmployeeID == id).FirstOrDefault();
+            try
+            {
+                var empleado = _context.Employees.Where(e => e.EmployeeID == id).FirstOrDefault();
 
-            return empleado;
+                return empleado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public void Update(Employees entity)
@@ -58,7 +66,10 @@ namespace Northwind.To.EF.Logic
                     empleadoAModificar.LastName = entity.LastName;
                     empleadoAModificar.Title = entity.Title;
                     _context.SaveChanges();
-                
+            }
+            else
+            {
+                throw new Exception();
             }
         }
     }
