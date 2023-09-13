@@ -21,6 +21,8 @@
                     <th>Estado</th>
                     <th>Especie</th>
                     <th>Género</th>
+                    <th>Origen</th>
+                    <th>Ubicacion actual</th>
                     <th>Imagen</th>
                 </tr>
             </thead>
@@ -32,6 +34,8 @@
                         <td>@character.status</td>
                         <td>@character.species</td>
                         <td>@character.gender</td>
+                        <td>@character.origin.name</td>
+                        <td>@character.location.name</td>
                         <td><img src="@character.image" class="img-fluid"></td>
                     </tr>
                 }

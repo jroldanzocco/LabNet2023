@@ -16,7 +16,7 @@ namespace Northwind.To.EF.MVC.Models
         public Origin origin { get; set; }
         public Location location { get; set; }
         public string image { get; set; }
-        public string[] episode { get; set; }
+        public List<string>episode { get; set; }
         public DateTime created { get; set; }
     }
     public class Origin
