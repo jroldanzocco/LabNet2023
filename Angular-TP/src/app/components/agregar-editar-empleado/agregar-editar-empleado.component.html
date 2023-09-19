@@ -1,21 +1,41 @@
 <div mat-dialog-title>
   <h1>Agregar empleado</h1>
 </div>
-<div mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Input</mat-label>
-    <input matInput />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Input</mat-label>
-    <input matInput />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Input</mat-label>
-    <input matInput />
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-raised-button color="primary">Agregar</button>
-  <button mat-raised-button>Cancelar</button>
-</div>
+<form [formGroup]="employeeForm" (ngSubmit)="formSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input
+          matInput
+          placeholder="Ej: Jeremias"
+          formControlName="FirstName"
+        />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input
+          matInput
+          placeholder="Ej: Roldan Zocco"
+          formControlName="LastName"
+        />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Rol</mat-label>
+        <input
+          matInput
+          placeholder="Ej: Developer .NET"
+          formControlName="Title"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary">Agregar</button>
+    <button mat-raised-button>Cancelar</button>
+  </div>
+</form>
