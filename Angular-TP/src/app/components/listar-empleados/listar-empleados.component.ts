@@ -4,6 +4,9 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
 import { AgregarEditarEmpleadoComponent } from '../agregar-editar-empleado/agregar-editar-empleado.component';
 import { Employee } from 'src/app/models/employee';
 
+//SweetAlert2
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-listar-empleados',
   templateUrl: './listar-empleados.component.html',
@@ -61,12 +64,30 @@ export class ListarEmpleadosComponent implements OnInit {
   }
 
   deleteEmployee(id: number) {
-    this._empService.deleteEmployee(id).subscribe({
-      next: (e) => {
-        alert('Empleado borrado');
-        this.getEmployees();
-      },
-      error: console.log,
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: 'No podras revertir esta accion!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borrar!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._empService.deleteEmployee(id).subscribe({
+          next: () => {
+            Swal.fire('Eliminado!', 'El registro fue eliminado.', 'success');
+            this.getEmployees();
+          },
+          error: () => {
+            Swal.fire(
+              'Error!',
+              'No puede eliminarse (Conflicto de referencias).',
+              'error'
+            );
+          },
+        });
+      }
     });
   }
 }
