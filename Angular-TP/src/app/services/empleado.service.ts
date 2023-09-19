@@ -15,4 +15,8 @@ export class EmpleadoService {
     let completeUrl = this.apiUrl + this.endPoint;
     return this.http.get<Array<Employee>>(completeUrl);
   }
+  public deleteEmployee(id: number): Observable<any> {
+    let completeUrl = this.apiUrl + this.endPoint;
+    return this.http.delete(`${completeUrl}${id}`);
+  }
 }
