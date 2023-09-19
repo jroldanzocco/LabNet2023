@@ -71,18 +71,26 @@ namespace Northwind.To.EF.WebAPI.Content
         {
             try
             {
-                if (empModel == null) return BadRequest();
 
-                EmployeesLogic logic = new EmployeesLogic();
-
-                logic.Update(new Entities.Employees
+                if(!ModelState.IsValid)
                 {
-                    EmployeeID = empModel.Id,
-                    FirstName = empModel.FirstName,
-                    LastName = empModel.LastName,
-                    Title = empModel.Title
-                });
-                return Ok($"El empleado {empModel.Id} fue modificado con exito");
+                    return BadRequest("Error validacion de datos");
+                }
+                else
+                {
+                    EmployeesLogic logic = new EmployeesLogic();
+
+                    logic.Update(new Entities.Employees
+                    {
+                        EmployeeID = empModel.Id,
+                        FirstName = empModel.FirstName,
+                        LastName = empModel.LastName,
+                        Title = empModel.Title
+                    });
+                    return Ok($"El empleado {empModel.Id} fue modificado con exito");
+                }
+
+                
             }
             catch (Exception)
             {
@@ -90,20 +98,26 @@ namespace Northwind.To.EF.WebAPI.Content
             }
         }
         [HttpPost]
-        public IHttpActionResult PostEmployee(Employee empModel)
+        public IHttpActionResult PostEmployee([FromBody]Employee empModel)
         {
             try
             {
-                if (empModel == null) return BadRequest();
-
-                EmployeesLogic logic = new EmployeesLogic();
-                logic.Add(new Entities.Employees
+                if (!ModelState.IsValid)
                 {
-                    FirstName = empModel.FirstName,
-                    LastName = empModel.LastName,
-                    Title = empModel.Title
-                });
-                return Ok($"Se incorporo un nuevo empleado correctamente");
+                    return BadRequest();
+                }
+                else
+                {
+                    EmployeesLogic logic = new EmployeesLogic();
+                    logic.Add(new Entities.Employees
+                    {
+                        FirstName = empModel.FirstName,
+                        LastName = empModel.LastName,
+                        Title = empModel.Title
+                    });
+                    return Ok($"Se incorporo un nuevo empleado correctamente");
+                }
+                
             }
             catch (Exception)
             {
