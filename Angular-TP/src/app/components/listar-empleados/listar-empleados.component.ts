@@ -30,10 +30,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./listar-empleados.component.css'],
 })
 export class ListarEmpleadosComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-
-  public listaEmployee: Array<Employee> = [];
+  displayedColumns: string[] = ['Id', 'FirstName', 'LastName', 'Title'];
+  dataSource: Array<Employee> = [];
 
   constructor(
     private cuadroDialogo: MatDialog,
@@ -51,8 +49,8 @@ export class ListarEmpleadosComponent implements OnInit {
   getEmployees() {
     this._empService.getEmployee().subscribe({
       next: (r) => {
-        this.listaEmployee = r;
-        console.log(r);
+        this.dataSource = r;
+        console.log(this.dataSource);
       },
     });
   }

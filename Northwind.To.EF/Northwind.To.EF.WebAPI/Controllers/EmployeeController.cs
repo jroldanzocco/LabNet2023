@@ -10,7 +10,7 @@ using System.Web.Http.Cors;
 
 namespace Northwind.To.EF.WebAPI.Content
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class EmployeeController : ApiController
     {
         public IEnumerable<Employee> GetAllEmployees()
