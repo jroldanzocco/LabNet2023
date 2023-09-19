@@ -28,13 +28,25 @@ export class AgregarEditarEmpleadoComponent implements OnInit {
   }
   formSubmit() {
     if (this.employeeForm.valid) {
-      this._empService.addEmployee(this.employeeForm.value).subscribe({
-        next: (e) => {
-          alert('Usuario agregado correctamente');
-          this.dialogRef.close(true);
-        },
-        error: console.log,
-      });
+      if (this.data) {
+        this._empService
+          .updateEmployee(this.data.Id, this.employeeForm.value)
+          .subscribe({
+            next: (e) => {
+              alert('Usuario modificado correctamente');
+              this.dialogRef.close(true);
+            },
+            error: console.log,
+          });
+      } else {
+        this._empService.addEmployee(this.employeeForm.value).subscribe({
+          next: (e) => {
+            alert('Usuario agregado correctamente');
+            this.dialogRef.close(true);
+          },
+          error: console.log,
+        });
+      }
     }
   }
 }

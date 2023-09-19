@@ -40,8 +40,15 @@ export class ListarEmpleadosComponent implements OnInit {
   }
 
   openEditEmployee(data: any) {
-    this.cuadroDialogo.open(AgregarEditarEmpleadoComponent, {
+    const dialog = this.cuadroDialogo.open(AgregarEditarEmpleadoComponent, {
       data,
+    });
+    dialog.afterClosed().subscribe({
+      next: (val) => {
+        if (val) {
+          this.getEmployees();
+        }
+      },
     });
   }
 

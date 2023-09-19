@@ -7,20 +7,22 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class EmpleadoService {
-  private apiUrl: string = 'https://localhost:44395/api/';
-  private endPoint: string = 'employee/';
+  private apiUrl: string = 'https://localhost:44395/api/employee/';
+
   constructor(private http: HttpClient) {}
 
   public addEmployee(empleado: Employee): Observable<any> {
-    let completeUrl = this.apiUrl + this.endPoint;
-    return this.http.post(completeUrl, empleado);
+    return this.http.post(this.apiUrl, empleado);
   }
   public getEmployee(): Observable<Array<Employee>> {
-    let completeUrl = this.apiUrl + this.endPoint;
-    return this.http.get<Array<Employee>>(completeUrl);
+    return this.http.get<Array<Employee>>(this.apiUrl);
   }
   public deleteEmployee(id: number): Observable<any> {
-    let completeUrl = this.apiUrl + this.endPoint;
-    return this.http.delete(`${completeUrl}${id}`);
+    return this.http.delete(`${this.apiUrl}${id}`);
+  }
+
+  public updateEmployee(id: number, empleado: Employee): Observable<any> {
+    empleado.Id = id;
+    return this.http.put(`${this.apiUrl}`, empleado);
   }
 }
