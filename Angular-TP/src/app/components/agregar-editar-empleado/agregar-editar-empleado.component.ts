@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 
 @Component({
@@ -8,13 +8,14 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
   templateUrl: './agregar-editar-empleado.component.html',
   styleUrls: ['./agregar-editar-empleado.component.css'],
 })
-export class AgregarEditarEmpleadoComponent {
+export class AgregarEditarEmpleadoComponent implements OnInit {
   employeeForm: FormGroup;
 
   constructor(
     private _formBuilder: FormBuilder,
     private _empService: EmpleadoService,
-    private dialogRef: MatDialogRef<AgregarEditarEmpleadoComponent>
+    private dialogRef: MatDialogRef<AgregarEditarEmpleadoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.employeeForm = this._formBuilder.group({
       FirstName: '',
@@ -22,7 +23,9 @@ export class AgregarEditarEmpleadoComponent {
       Title: '',
     });
   }
-
+  ngOnInit(): void {
+    this.employeeForm.patchValue(this.data);
+  }
   formSubmit() {
     if (this.employeeForm.valid) {
       this._empService.addEmployee(this.employeeForm.value).subscribe({
