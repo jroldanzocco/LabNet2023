@@ -7,3 +7,10 @@ table {
   padding-top: 20px;
   margin: 0 auto;
 }
+
+.add-employee-button {
+  position: relative;
+  top: 13px;
+  left: 600px;
+  z-index: 1;
+}
