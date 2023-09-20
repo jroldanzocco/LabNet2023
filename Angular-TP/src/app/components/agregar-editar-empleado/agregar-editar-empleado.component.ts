@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 
+//SweetAlert2
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-agregar-editar-empleado',
   templateUrl: './agregar-editar-empleado.component.html',
@@ -60,7 +63,7 @@ export class AgregarEditarEmpleadoComponent implements OnInit {
           .updateEmployee(this.data.Id, this.employeeForm.value)
           .subscribe({
             next: (e) => {
-              alert('Usuario modificado correctamente');
+              this.alertManager('Empleado modificado correctamente');
               this.dialogRef.close(true);
             },
             error: console.log,
@@ -68,12 +71,16 @@ export class AgregarEditarEmpleadoComponent implements OnInit {
       } else {
         this._empService.addEmployee(this.employeeForm.value).subscribe({
           next: (e) => {
-            alert('Usuario agregado correctamente');
+            this.alertManager('Empleado agregado correctamente');
             this.dialogRef.close(true);
           },
           error: console.log,
         });
       }
     }
+  }
+
+  alertManager(mensaje: string) {
+    Swal.fire('Tarea completada', mensaje, 'success');
   }
 }
