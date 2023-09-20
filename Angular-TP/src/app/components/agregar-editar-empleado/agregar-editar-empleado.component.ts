@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 
@@ -18,10 +18,37 @@ export class AgregarEditarEmpleadoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.employeeForm = this._formBuilder.group({
-      FirstName: '',
-      LastName: '',
-      Title: '',
+      FirstName: [
+        '',
+        this.crearValidacion(2, 10, true, /^[A-Za-z]+( [A-Za-z]+)*$/),
+      ],
+      LastName: [
+        '',
+        this.crearValidacion(2, 20, true, /^[A-Za-z]+( [A-Za-z]+)*$/),
+      ],
+      Title: [
+        '',
+        this.crearValidacion(2, 30, true, /^[A-Za-z]+( [A-Za-z]+)*$/),
+      ],
     });
+  }
+
+  crearValidacion(
+    minLength: number,
+    maxLength: number,
+    requerido: boolean,
+    regex?: RegExp
+  ) {
+    const validado = [];
+    if (requerido) {
+      validado.push(Validators.required);
+    }
+    validado.push(Validators.minLength(minLength));
+    validado.push(Validators.maxLength(maxLength));
+    if (regex) {
+      validado.push(Validators.pattern(regex));
+    }
+    return validado;
   }
   ngOnInit(): void {
     this.employeeForm.patchValue(this.data);

@@ -11,6 +11,9 @@
           placeholder="Ej: Jeremias"
           formControlName="FirstName"
         />
+        <mat-error *ngIf="employeeForm.get('FirstName')?.hasError('required')">
+          Nombre es obligatorio
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -21,6 +24,9 @@
           placeholder="Ej: Roldan Zocco"
           formControlName="LastName"
         />
+        <mat-error *ngIf="employeeForm.get('LastName')?.hasError('required')">
+          Apellido es obligatorio
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -31,6 +37,9 @@
           placeholder="Ej: Developer .NET"
           formControlName="Title"
         />
+        <mat-error *ngIf="employeeForm.get('Title')?.hasError('required')">
+          Rol es obligatorio
+        </mat-error>
       </mat-form-field>
     </div>
   </div>
